@@ -1,0 +1,14 @@
+package com.pet.service;
+
+import java.io.IOException;
+import java.util.Optional;
+
+import com.pet.dto.UserDTO;
+import com.pet.entities.User;
+
+
+
+public interface IUserDetails {
+	public UserDTO registerUser(UserDTO user) throws IOException;
+	Optional<User> findByEmail(String email);
+}

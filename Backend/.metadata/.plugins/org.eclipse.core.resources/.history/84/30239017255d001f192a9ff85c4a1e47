@@ -1,0 +1,5 @@
+package com.pet.config;
+
+public class SecurityConfig {
+
+}

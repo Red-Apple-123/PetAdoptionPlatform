@@ -1,0 +1,19 @@
+package com.pet.service;
+
+import com.pet.entities.User;
+
+public class UserServiceImpl implements IUserService {
+
+	@Override
+	public User registerUser(String email, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User authenticateUser(String email, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

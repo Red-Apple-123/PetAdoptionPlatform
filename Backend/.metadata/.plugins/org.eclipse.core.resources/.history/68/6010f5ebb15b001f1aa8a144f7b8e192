@@ -1,0 +1,5 @@
+package com.pet.service;
+
+public class ShelerServiceImpl implements IShelterService {
+
+}

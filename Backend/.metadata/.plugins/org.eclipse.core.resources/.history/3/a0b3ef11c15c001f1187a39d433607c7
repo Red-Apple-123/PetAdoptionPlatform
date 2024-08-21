@@ -1,0 +1,64 @@
+package com.pet.entities;
+
+import com.pet.enums.HavePet;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Table(name="adoption_application_details")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class AdoptionApplicationDetails {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id")
+	private int detailsId;
+	
+	@OneToOne
+	@JoinColumn(name= "application_id")
+	private AdoptionApplication applicationId;
+	
+	private int age;
+	
+	@Column(length = 20)
+	private String name;
+	
+	@Column(length=500)
+	private String address;
+	
+	@Column(length = 35, unique = true)
+	private String email;
+	
+	private String occupation;
+	
+	@Column(name = "havePet")
+    @Enumerated(EnumType.STRING)
+	private HavePet havePets;
+	
+	@Column(length = 20)
+	private String petSpecies;
+	
+	@Column(length = 20)
+	private String petName;
+	
+	private String petAge;
+	
+	@Column(length=500)
+	private String petDescription;
+}

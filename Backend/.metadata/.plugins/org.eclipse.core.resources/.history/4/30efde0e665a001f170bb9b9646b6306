@@ -1,0 +1,69 @@
+package entities;
+
+import java.time.LocalDate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import entities.Appointment;
+import entities.User;
+
+import enums.ApplicationStatus;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Table(name="adoptionApplications")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class AdoptionApplication {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="application_id")
+	private int applicationId;
+	
+	@Column(name="submission_date")
+	private LocalDate submissionDate;
+	
+	@Column(length = 10)
+	@Enumerated(EnumType.STRING)
+	private ApplicationStatus applicationStatus;
+	
+	//adoption_application-->payment(@oneToOne)
+	//adoption_application-->user(@ManyToOne)
+	//adoption_application-->pet(@ManyToOne)
+	//adoption_application-->appointment(@oneToOne)
+	//adoption_application-->shelter(@ManyToOne)
+	@OneToOne(mappedBy = "adoptionApplication")
+	private Payment payment;
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+	
+	@ManyToOne
+	@JoinColumn(name = "pet_id")
+	private Pet pet;
+	
+	@OneToOne
+	@JoinColumn(name = "appointment_id")
+	private Appointment appointment;
+	
+	@ManyToOne
+	@JoinColumn(name = "shelter_id")
+	private Shelter shelter;
+}

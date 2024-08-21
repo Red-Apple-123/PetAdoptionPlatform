@@ -1,0 +1,118 @@
+.user-dashboard-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .header {
+    width: 100%;
+    background-color: #FED800; /* Orange background for header */
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    box-sizing: border-box; /* Ensure padding doesn't cause overflow */
+  }
+  
+  .header-logo {
+    height: 40px;
+    width: auto;
+  }
+  
+  .header-button {
+    background-color: #fff;
+    color: #000;
+    border: 2px solid #000; /* Black border */
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+    position: relative;
+    right: 0;
+    top: 0;
+    margin-left: auto;
+  }
+  
+  .header-button:hover {
+    background-color: #000;
+    color: #fff;
+  }
+  
+  .sidebar {
+    width: 200px;
+    background-color: #fff;
+    color: #000;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: fixed;
+    top: 50px; /* Adjust based on header height */
+    left: 0;
+    bottom: 0;
+    box-sizing: border-box;
+    overflow-y: auto;
+  }
+  
+  .sidebar-button {
+    background-color: #fff;
+    color: #000;
+    border: 2px solid #000; /* Black border */
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin: 5px 0;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .sidebar-button:hover {
+    background-color: #000;
+    color: #fff;
+  }
+  
+  .main-content {
+    margin-left: 220px; /* Adjust based on sidebar width */
+    padding: 20px;
+    background-color: #FFFFE0; /* Light orange background for content area */
+    flex: 1;
+    transition: margin-left 0.3s ease;
+    margin-top: 50px; /* Adjust for header height */
+    box-sizing: border-box; /* Ensure padding doesn't cause overflow */
+  }
+  
+  /* Media query for responsive design */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 100%;
+      position: static;
+      top: auto;
+      bottom: auto;
+      flex-direction: row;
+      overflow: hidden;
+    }
+    .sidebar-button {
+      flex: 1;
+      margin: 5px;
+    }
+    .main-content {
+      margin-left: 0;
+      margin-top: 50px; /* Ensure content is visible below the header */
+    }
+  }
+  

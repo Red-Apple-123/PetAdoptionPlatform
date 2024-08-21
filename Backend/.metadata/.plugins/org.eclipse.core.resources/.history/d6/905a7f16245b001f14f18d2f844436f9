@@ -1,0 +1,64 @@
+package com.pet.entities;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import com.pet.enums.AppointmentStatus;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Table(name="appointments")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class Appointment {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="appointment_id")
+	private int appointmentId;
+	
+	@Column(name="appointment_location",length=45)
+	private String location;
+	
+	@Column(name="appointment_date")
+	private LocalDate appointmentDate;
+	
+	@Column(name="appointment_time")
+	private LocalTime appointmentTime;
+	
+	@Column(name = "appointment_satus", length = 20)
+	@Enumerated(EnumType.STRING)
+	private AppointmentStatus appointmentStatus;
+	
+	//appointment-->shelter(@ManyToOne)
+	//appointment-->adoption_application(@onetoone)
+	//appointment-->user(@manytoone)
+	@ManyToOne
+	@JoinColumn(name = "shelter_id")
+	private Shelter shelter;
+
+	@OneToOne(mappedBy = "appointment")
+	private AdoptionApplication adoptionApplication;
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+}

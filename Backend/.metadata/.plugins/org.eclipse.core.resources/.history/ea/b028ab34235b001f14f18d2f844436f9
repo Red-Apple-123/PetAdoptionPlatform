@@ -1,0 +1,58 @@
+package com.pet.entities;
+
+import java.util.Set;
+import java.time.LocalDate;
+import java.util.List;
+
+import com.pet.enums.RoleEnum;
+
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+
+public class User {
+	
+@Column(length = 35, unique = true)
+private String email;
+
+/* @DateTimeFormat(pattern = "yyyy-MM-dd") */
+@Column(name="reg_date")
+private LocalDate registrationDate;
+
+private String password;
+
+private String profilePicPath;
+
+public User() {
+super();
+}
+
+@ElementCollection(targetClass = RoleEnum.class, fetch = FetchType.EAGER)
+@Enumerated(EnumType.STRING)
+@CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+@Column(name = "role_name")
+private Set<RoleEnum> userRoles;
+
+
+//user-->payment(@OneToMany)
+//user-->shelter(@OneToOne)
+//user-->adoption_application(@oneTomany)
+//user-->appointment(@OnetoMany)
+
+@OneToMany(mappedBy = "user")
+private List<Payment> payments;
+
+@OneToMany(mappedBy = "user")
+private List<AdoptionApplication> adoptionApplications;
+
+@OneToMany(mappedBy = "user")
+private List<Appointment> appointments;
+
+@OneToOne(mappedBy = "user")
+private Shelter shelter;
+}

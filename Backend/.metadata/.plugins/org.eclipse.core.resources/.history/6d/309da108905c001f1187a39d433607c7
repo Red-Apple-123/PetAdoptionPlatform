@@ -1,0 +1,13 @@
+package com.pet.service;
+
+import com.pet.entities.AdoptionApplicationDetails;
+
+public class AdoptionApplicationDetailsService implements IAdoptionApplicationDetailsService {
+
+	@Override
+	public AdoptionApplicationDetails saveAdoptionApplicationDetails(AdoptionApplicationDetails details) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

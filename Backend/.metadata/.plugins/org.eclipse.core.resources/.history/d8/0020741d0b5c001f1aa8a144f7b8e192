@@ -1,0 +1,18 @@
+package com.pet.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.pet.entities.AdoptionApplication;
+import com.pet.repository.AdoptionApplicationRepository;
+
+public class AdoptionApplicationImpl implements IAdoptionApplicationService {
+
+	@Autowired
+	private AdoptionApplicationRepository adoptionApplicationRepository;
+	@Override
+	public AdoptionApplication saveApplication(AdoptionApplication application) {
+		// TODO Auto-generated method stub
+		return adoptionApplicationRepository.save(application);
+	}
+
+}

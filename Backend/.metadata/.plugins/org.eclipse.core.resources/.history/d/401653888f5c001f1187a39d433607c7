@@ -1,0 +1,8 @@
+package com.pet.service;
+
+import com.pet.entities.AdoptionApplication;
+import com.pet.entities.AdoptionApplicationDetails;
+
+public interface IAdoptionApplicationService {
+	AdoptionApplication saveApplication(AdoptionApplication application,AdoptionApplicationDetails details);
+}

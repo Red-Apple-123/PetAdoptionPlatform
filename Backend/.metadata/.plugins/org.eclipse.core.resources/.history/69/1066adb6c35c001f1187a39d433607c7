@@ -1,0 +1,95 @@
+package com.pet.entities;
+
+import java.util.List;
+
+
+
+import com.pet.enums.PetAdoptionStatus;
+import com.pet.enums.PetCategory;
+import com.pet.enums.PetHealthStatus;
+import com.pet.enums.PetTrainStatus;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Table(name="pets")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class Pet {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int pet_id;
+	
+	@Column(length = 20)
+	private String name;
+	
+	@Column(length = 20)
+	private String species;
+	
+	@Column(length = 20)
+	private String breed;
+	
+	@Column(length = 10)
+	private int age;
+	
+	@Column(length = 18)
+	private String color;
+	
+	@Column(length = 20)
+	private String gender;
+	
+	@Column(length=500)
+	private String description;
+	
+	@Column(name="pet_pic_path")
+	private String petPicPath;
+	
+	@Column(name = "health_satus", length = 20)
+	@Enumerated(EnumType.STRING)
+	private PetHealthStatus healthStatus;
+	
+	@Column(length = 20)
+	@Enumerated(EnumType.STRING)
+	private PetCategory category;
+	
+	@Column(name = "pet_train_status", length = 20)
+	@Enumerated(EnumType.STRING)
+	private PetTrainStatus petTrainStatus;
+	
+	@Column(name = "pet_adoption_status", length = 20)
+	@Enumerated(EnumType.STRING)
+	private PetAdoptionStatus petAdoptionStatus;
+	
+	//pet-->adoption_application(@onetoMany)
+	//pet-->shelter(@ManyToOne)
+	@ManyToOne
+	@JoinColumn(name = "shelter_id")
+	private Shelter shelter;
+	
+	//@OneToMany(mappedBy = "pet")
+	@OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<AdoptionApplication> adoptionApplications;
+	
+	
+	public Pet(int petId) {
+		this.petId=pet_id;
+	}
+}

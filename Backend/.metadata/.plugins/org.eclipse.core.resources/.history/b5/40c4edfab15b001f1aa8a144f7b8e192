@@ -1,0 +1,12 @@
+package com.pet.service;
+
+import com.pet.entities.Shelter;
+
+public class ShelerServiceImpl implements IShelterService {
+
+
+	@Override
+	public Shelter saveShelter(Shelter shelter) {
+		return shelterRepository.save(shelter);
+	}
+}

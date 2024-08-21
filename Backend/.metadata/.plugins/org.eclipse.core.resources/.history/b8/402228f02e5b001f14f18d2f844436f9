@@ -1,0 +1,53 @@
+package com.pet.service;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.pet.entities.Pet;
+import com.pet.repository.PetRepository;
+
+public class PetServiceImpl implements IPetService {
+
+	@Autowired
+	private PetRepository petRepository;
+	
+	private final String UPLOAD_DIR = "uploads/";
+	
+	@Override
+	public Pet createPet(String name, String species, String breed, int age, String color, String gender,
+			String description, MultipartFile petPic) {
+        Pet pet = new Pet();
+        pet.setName(name);
+        pet.setSpecies(species);
+        pet.setBreed(breed);
+        pet.setAge(age);
+        pet.setColor(color);
+        pet.setGender(gender);
+        pet.setDescription(description);
+
+        if (petPic != null && !petPic.isEmpty()) {
+            String fileName = UUID.randomUUID().toString() + "_" + petPic.getOriginalFilename();
+            try {
+                // Create uploads directory if it does not exist
+                File uploadDir = new File(UPLOAD_DIR);
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdirs(); // Creates the directory and any necessary but nonexistent parent directories
+                }
+                
+                File file = new File(UPLOAD_DIR + fileName);
+                petPic.transferTo(file);
+                pet.setPetPicPath(fileName);
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Handle file upload errors appropriately
+            }
+        }
+
+        return petRepository.save(pet);
+	}
+
+}

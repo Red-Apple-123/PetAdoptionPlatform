@@ -1,0 +1,37 @@
+package com.pet.service;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.pet.entities.User;
+import com.pet.enums.RoleEnum;
+import com.pet.repository.UserRepository;
+
+import jakarta.transaction.Transactional;
+@Component
+@Transactional
+public class UserServiceImpl implements IUserService {
+
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Override
+	public User registerUser(String email, String password,String role) {
+		User user = new User();
+        user.setEmail(email);
+        user.setPassword(password); // In real applications, hash the password
+        user.setRole(RoleEnum.valueOf(role));
+        return userRepository.save(user);
+	}
+
+	@Override
+	public User authenticateUser(String email, String password) {
+		User user = userRepository.findByEmail(email);
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
+        }
+        return null;
+	}
+
+}

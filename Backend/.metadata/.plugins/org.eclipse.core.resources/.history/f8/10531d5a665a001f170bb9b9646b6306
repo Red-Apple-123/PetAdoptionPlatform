@@ -1,0 +1,21 @@
+package com.pet.dto;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import com.pet.enums.RoleEnum;
+
+import lombok.Getter;
+import lombok.Setter;
+@Getter
+@Setter
+public class AuthResponse {
+	private String message;
+	private String jwtToken;
+	private Long id;
+	private String email;
+	private String firstName;
+	private String lastName;
+	private byte[] profilePicture;
+	private Set<RoleEnum> userRoles = new HashSet<RoleEnum>();
+}

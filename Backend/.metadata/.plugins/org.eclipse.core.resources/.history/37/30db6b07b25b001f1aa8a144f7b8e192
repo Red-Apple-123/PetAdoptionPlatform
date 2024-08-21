@@ -1,0 +1,17 @@
+package com.pet.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.pet.entities.Shelter;
+import com.pet.repository.ShelterRepository;
+
+public class ShelerServiceImpl implements IShelterService {
+
+	@Autowired
+	private ShelterRepository shelterRepository;
+
+	@Override
+	public Shelter saveShelter(Shelter shelter) {
+		return shelterRepository.save(shelter);
+	}
+}

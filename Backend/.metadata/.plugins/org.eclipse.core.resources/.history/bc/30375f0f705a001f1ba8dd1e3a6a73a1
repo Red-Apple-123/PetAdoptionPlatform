@@ -1,0 +1,27 @@
+package com.pet.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.pet.entities.User;
+import com.pet.repository.UserRepository;
+
+public class UserServiceImpl implements IUserService {
+
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Override
+	public User registerUser(String email, String password,RoleEnum role) {
+		User user = new User();
+        user.setEmail(email);
+        user.setPassword(password); // In real applications, hash the password
+        return userRepository.save(user);
+	}
+
+	@Override
+	public User authenticateUser(String email, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
